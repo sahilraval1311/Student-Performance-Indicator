@@ -1,5 +1,5 @@
 import sys
-from logger import setup_logging
+from logger import get_logger
 
 
 def error_message_detail(error, error_detail: sys):
@@ -22,7 +22,7 @@ class CustomException(Exception):
 
 
 if __name__ == "__main__":
-    logger = setup_logging()
+    logger = get_logger(__name__)
     try:
         a = 1 / 0
     except Exception as e:
