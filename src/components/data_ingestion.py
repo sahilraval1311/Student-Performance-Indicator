@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from exception import CustomException
 from logger import get_logger
 from components.data_transformation import DataTransformation, DataTransformationConfig
+from components.model_trainer import ModelTrainerConfig, ModelTrainer
 
 logger = get_logger(__name__)
 
@@ -54,4 +55,10 @@ if __name__ == "__main__":
     train_path, test_path = data_ingestion.initiate_data_ingestion()
     logger.info(f"Train data path: {train_path}, Test data path: {test_path}")
     data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_path, test_path)
+    train_arr, test_arr, _ = data_transformation.initiate_data_transformation(
+        train_path, test_path
+    )
+    modeltrainer = ModelTrainer()
+    logger.info(
+        f"R2_SCORE for Best Model: {modeltrainer.initiate_model_trainer(train_arr, test_arr)}"
+    )
