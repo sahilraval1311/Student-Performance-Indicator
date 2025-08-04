@@ -1,4 +1,5 @@
 import sys
+import os
 
 import pandas as pd
 
@@ -16,8 +17,12 @@ class PredictPipeline:
     def predict(self, features):
         try:
             logger.info(f"Features: {features}")
-            model_path = "artifacts\model.pkl"
-            preprocessor_path = "artifacts\preprocessor.pkl"
+            model_path = os.path.join("artifacts", "model.pkl")
+            logger.info(f"Model path: {model_path}")
+            preprocessor_path = os.path.join("..", "artifacts", "preprocessor.pkl")
+            logger.info(f"Preprocessor path: {preprocessor_path}")
+            model_path = "artifacts/model.pkl"
+            preprocessor_path = "artifacts/preprocessor.pkl"
             model = load_object(file_path=model_path)
             preprocessor = load_object(file_path=preprocessor_path)
             data_scaled = preprocessor.transform(features)
